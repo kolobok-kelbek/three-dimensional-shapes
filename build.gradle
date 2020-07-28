@@ -11,10 +11,15 @@ repositories {
 }
 
 dependencies {
+    // Dependency injection
+    compile group: 'com.google.dagger', name: 'dagger', version: '2.28.3'
+
+    // Lightweight Java Game Library (Graphics libraries)
     compile group: 'org.lwjgl', name: 'lwjgl', version: '3.2.1'
     compile group: 'org.lwjgl.osgi', name: 'org.lwjgl.glfw', version: '3.2.1'
     compile group: 'org.lwjgl.osgi', name: 'org.lwjgl.opengl', version: '3.2.1'
 
+    // Test libraries
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
