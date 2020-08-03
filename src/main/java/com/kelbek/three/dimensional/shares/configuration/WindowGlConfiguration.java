@@ -39,10 +39,6 @@ public class WindowGlConfiguration {
 
     @Bean
     public long window() {
-        if (window != 0) {
-            return window;
-        }
-
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
         GLFWErrorCallback.createPrint(System.err).set();
