@@ -1,5 +1,6 @@
 package com.kelbek.three.dimensional.shares;
 
+import com.kelbek.three.dimensional.shares.input.InputRegistrator;
 import com.kelbek.three.dimensional.shares.window.Looper;
 import lombok.extern.slf4j.Slf4j;
 import org.lwjgl.Version;
@@ -25,12 +26,17 @@ class Application implements CommandLineRunner {
     @Autowired
     private Looper looper;
 
+    @Autowired
+    private InputRegistrator inputRegistrator;
+
     public void run(String... args) {
         if(!GLFW.glfwInit()) {
             throw new RuntimeException("Cannot initialize OPenGL");
         }
 
         log.info("Run with LWJGL " + Version.getVersion());
+
+        inputRegistrator.registration();
 
         looper.loop();
 

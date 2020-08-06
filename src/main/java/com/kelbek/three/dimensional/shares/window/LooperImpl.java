@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 
 @Service
 public class LooperImpl implements Looper {
@@ -22,16 +21,27 @@ public class LooperImpl implements Looper {
         // bindings available for use.
         GL.createCapabilities();
 
-        // Set the clear color
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while ( !glfwWindowShouldClose(window) ) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+            // Set the clear color
+            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+            float[][] vertices = new float[][]{
+                    {0.0f, 0.5f, 0.0f},
+                    {-0.5f, -0.5f, 0.0f},
+                    {0.5f, -0.5f, 0.0f}
+            };
+
+            glBegin(GL_TRIANGLES);
+            glColor3f(1f, 1f, 1f);
+            glVertex3fv(vertices[0]);
+            glVertex3fv(vertices[1]);
+            glVertex3fv(vertices[2]);
+            glEnd();
 
             glfwSwapBuffers(window); // swap the color buffers
-
             // Poll for window events. The key callback above will only be
             // invoked during this call.
             glfwPollEvents();
