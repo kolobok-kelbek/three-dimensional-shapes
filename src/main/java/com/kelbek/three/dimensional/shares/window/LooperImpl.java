@@ -1,8 +1,11 @@
 package com.kelbek.three.dimensional.shares.window;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.nio.FloatBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -11,6 +14,9 @@ import static org.lwjgl.opengl.GL11.*;
 public class LooperImpl implements Looper {
     @Autowired
     private long window;
+
+    @Autowired
+    private Renderer renderer;
 
     @Override
     public void loop() {
@@ -28,18 +34,19 @@ public class LooperImpl implements Looper {
             // Set the clear color
             glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-            float[][] vertices = new float[][]{
-                    {0.0f, 0.5f, 0.0f},
-                    {-0.5f, -0.5f, 0.0f},
-                    {0.5f, -0.5f, 0.0f}
-            };
+//            FloatBuffer ambient = BufferUtils.createFloatBuffer(4);
+//            ambient.put(new float[] { 0.5f, 1f, 1f, 1f, });
+//            ambient.flip();
+//
+//            FloatBuffer position = BufferUtils.createFloatBuffer(4);
+//            position.put(new float[] { 0f, 0f, 0f, 1f, });
+//            position.flip();
+//
+//            glEnable(GL_LIGHTING);
+//            glEnable(GL_LIGHT0);
+//            glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 
-            glBegin(GL_TRIANGLES);
-            glColor3f(1f, 1f, 1f);
-            glVertex3fv(vertices[0]);
-            glVertex3fv(vertices[1]);
-            glVertex3fv(vertices[2]);
-            glEnd();
+            renderer.render();
 
             glfwSwapBuffers(window); // swap the color buffers
             // Poll for window events. The key callback above will only be
