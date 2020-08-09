@@ -9,7 +9,7 @@ import java.util.List;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
 
 @Service
-public class InputRegistratorImpl implements InputRegistrator {
+public class InputRegistrarImpl implements InputRegistrator {
     @Autowired
     private long window;
 
@@ -18,8 +18,6 @@ public class InputRegistratorImpl implements InputRegistrator {
 
     @Override
     public void registration() {
-        for (GLFWKeyCallbackI handler : handlers) {
-            glfwSetKeyCallback(window, handler);
-        }
+        handlers.forEach(handler -> glfwSetKeyCallback(window, handler));
     }
 }
