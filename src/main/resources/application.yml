@@ -1,5 +1,7 @@
 
 window:
-  name: Three-dimensional shapes
+  title: "Three-dimensional shapes"
   width: 800
   height: 600
+  vSync: true
+  resized: false
