@@ -47,6 +47,7 @@ public class Window {
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
         windowHandle = glfwCreateWindow(width, height, title, NULL, NULL);
+
         if (windowHandle == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
@@ -83,6 +84,8 @@ public class Window {
 
         glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
         glEnable(GL_DEPTH_TEST);
+
+        glfwSetInputMode(windowHandle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
 
     public long getWindowHandle() {

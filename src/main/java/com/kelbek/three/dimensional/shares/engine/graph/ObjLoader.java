@@ -11,7 +11,7 @@ public class ObjLoader {
 
     public static Mesh loadMesh(String fileName) throws Exception {
         List<String> lines = Utils.readAllLines(fileName);
-        
+
         List<Vector3f> vertices = new ArrayList<>();
         List<Vector2f> textures = new ArrayList<>();
         List<Vector3f> normals = new ArrayList<>();
@@ -25,14 +25,16 @@ public class ObjLoader {
                     Vector3f vec3f = new Vector3f(
                             Float.parseFloat(tokens[1]),
                             Float.parseFloat(tokens[2]),
-                            Float.parseFloat(tokens[3]));
+                            Float.parseFloat(tokens[3])
+                    );
                     vertices.add(vec3f);
                     break;
                 case "vt":
                     // Texture coordinate
                     Vector2f vec2f = new Vector2f(
                             Float.parseFloat(tokens[1]),
-                            Float.parseFloat(tokens[2]));
+                            Float.parseFloat(tokens[2])
+                    );
                     textures.add(vec2f);
                     break;
                 case "vn":
@@ -40,7 +42,8 @@ public class ObjLoader {
                     Vector3f vec3fNorm = new Vector3f(
                             Float.parseFloat(tokens[1]),
                             Float.parseFloat(tokens[2]),
-                            Float.parseFloat(tokens[3]));
+                            Float.parseFloat(tokens[3])
+                    );
                     normals.add(vec3fNorm);
                     break;
                 case "f":
@@ -56,7 +59,7 @@ public class ObjLoader {
     }
 
     private static Mesh reorderLists(List<Vector3f> posList, List<Vector2f> textCoordList,
-            List<Vector3f> normList, List<Face> facesList) {
+                                     List<Vector3f> normList, List<Face> facesList) {
 
         List<Integer> indices = new ArrayList<>();
 
@@ -86,9 +89,14 @@ public class ObjLoader {
         return new Mesh(posArr, normArr, indicesArr);
     }
 
-    private static void processFaceVertex(IdxGroup indices, List<Vector2f> textCoordList,
-            List<Vector3f> normList, List<Integer> indicesList,
-            float[] texCoordArr, float[] normArr) {
+    private static void processFaceVertex(
+            IdxGroup indices,
+            List<Vector2f> textCoordList,
+            List<Vector3f> normList,
+            List<Integer> indicesList,
+            float[] texCoordArr,
+            float[] normArr
+    ) {
 
         int posIndex = indices.idxPos;
         indicesList.add(posIndex);

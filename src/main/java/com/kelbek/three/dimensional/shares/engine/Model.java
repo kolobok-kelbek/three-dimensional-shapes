@@ -6,9 +6,9 @@ import com.kelbek.three.dimensional.shares.engine.graph.Mesh;
 public class Model {
 
     private final Mesh mesh;
-    
+
     private final Vector3f position;
-    
+
     private float scale;
 
     private final Vector3f rotation;
@@ -47,7 +47,7 @@ public class Model {
         this.rotation.y = y;
         this.rotation.z = z;
     }
-    
+
     public Mesh getMesh() {
         return mesh;
     }

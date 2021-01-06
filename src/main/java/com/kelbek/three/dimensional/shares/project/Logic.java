@@ -38,7 +38,7 @@ public class Logic implements Logical {
     }
 
     @Override
-    public void init(Window window) throws Exception  {
+    public void init(Window window) throws Exception {
         renderer.init();
 
         models = new Model[]{
@@ -120,10 +120,8 @@ public class Logic implements Logical {
     public void update(float interval, MouseInput mouseInput) {
         camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
 
-        if (mouseInput.isRightButtonPressed()) {
-            Vector2f rotVec = mouseInput.getDisplVec();
-            camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
-        }
+        Vector2f rotVec = mouseInput.getDisplVec();
+        camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
     }
 
     @Override

@@ -57,7 +57,7 @@ public class Engine implements Runnable {
 
             render();
 
-            if ( !window.isvSync() ) {
+            if (!window.isvSync()) {
                 sync();
             }
         }
@@ -66,7 +66,7 @@ public class Engine implements Runnable {
     protected void cleanup() {
         logic.cleanup();
     }
-    
+
     private void sync() {
         float loopSlot = 1f / TARGET_FPS;
         double endTime = timer.getLastLoopTime() + loopSlot;

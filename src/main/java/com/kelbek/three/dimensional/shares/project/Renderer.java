@@ -77,7 +77,6 @@ public class Renderer {
         lightPos.z = aux.z;
         shaderProgram.setUniform("pointLight", currPointLight);
 
-        shaderProgram.setUniform("texture_sampler", 0);
         for (Model model : models) {
             Mesh mesh = model.getMesh();
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(model, viewMatrix);
