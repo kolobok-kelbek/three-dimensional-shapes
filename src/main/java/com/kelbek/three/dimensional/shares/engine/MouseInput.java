@@ -1,10 +1,12 @@
 package com.kelbek.three.dimensional.shares.engine;
 
+import lombok.extern.slf4j.Slf4j;
 import org.joml.Vector2d;
 import org.joml.Vector2f;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+@Slf4j
 public class MouseInput {
 
     private final Vector2d previousPos;
@@ -49,20 +51,15 @@ public class MouseInput {
         displVec.x = 0;
         displVec.y = 0;
 
-        if (previousPos.x > 0 && previousPos.y > 0 && inWindow) {
-            double deltax = currentPos.x - previousPos.x;
-            double deltay = currentPos.y - previousPos.y;
+        double deltax = currentPos.x - previousPos.x;
+        double deltay = currentPos.y - previousPos.y;
 
-            boolean rotateX = deltax != 0;
-            boolean rotateY = deltay != 0;
+        if (deltax != 0) {
+            displVec.y = (float) deltax;
+        }
 
-            if (rotateX) {
-                displVec.y = (float) deltax;
-            }
-
-            if (rotateY) {
-                displVec.x = (float) deltay;
-            }
+        if (deltay != 0) {
+            displVec.x = (float) deltay;
         }
 
         previousPos.x = currentPos.x;

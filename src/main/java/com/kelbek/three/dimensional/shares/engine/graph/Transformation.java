@@ -1,9 +1,11 @@
 package com.kelbek.three.dimensional.shares.engine.graph;
 
+import lombok.extern.slf4j.Slf4j;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import com.kelbek.three.dimensional.shares.engine.Model;
 
+@Slf4j
 public class Transformation {
 
     private final Matrix4f projectionMatrix;

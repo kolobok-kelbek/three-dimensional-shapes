@@ -1,6 +1,7 @@
 package com.kelbek.three.dimensional.shares.project;
 
 import com.kelbek.three.dimensional.shares.engine.*;
+import lombok.extern.slf4j.Slf4j;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import com.kelbek.three.dimensional.shares.engine.graph.*;
@@ -11,11 +12,15 @@ import org.springframework.stereotype.Service;
 import static org.lwjgl.glfw.GLFW.*;
 
 @Service
+@Slf4j
 public class Logic implements Logical {
 
     private static final float MOUSE_SENSITIVITY = 0.2f;
 
     private final Vector3f cameraInc;
+
+    @Autowired
+    private Window window;
 
     @Autowired
     private Renderer renderer;
@@ -29,9 +34,9 @@ public class Logic implements Logical {
 
     private PointLight pointLight;
 
-    private boolean polygonMode = false;
+    private boolean isPolygonMode = false;
 
-    private static final float CAMERA_POS_STEP = 0.05f;
+    private static final float CAMERA_POS_STEP = 0.08f;
 
     public Logic() {
         cameraInc = new Vector3f(0.0f, 0.0f, 0.0f);
@@ -43,7 +48,7 @@ public class Logic implements Logical {
 
         models = new Model[]{
                 createModel(new Vector3f(0, 0, -5), new Vector4f(0.6f, 0.2f, 0.2f, 0f), Models.OCTAHEDRON),
-                createModel(new Vector3f(-2, 2, -5), new Vector4f(0.3f, 0.2f, 0.2f, 0.0f)),
+                createModel(new Vector3f(-2, 2, -5), new Vector4f(0.3f, 0.2f, 0.2f, 0.0f), Models.HEXAHEDRON),
                 createModel(new Vector3f(2, 1, -3), new Vector4f(0.2f, 0.2f, 0.6f, 0.0f), Models.TETRAHEDRON),
         };
 
@@ -59,10 +64,6 @@ public class Logic implements Logical {
         pointLight.setAttenuation(att);
 
         return pointLight;
-    }
-
-    private Model createModel(Vector3f position, Vector4f color) throws Exception {
-        return createModel(position, color, Models.HEXAHEDRON);
     }
 
     private Model createModel(Vector3f position, Vector4f color, Models modelType) throws Exception {
@@ -110,9 +111,15 @@ public class Logic implements Logical {
         }
 
         if (window.isKeyPressed(GLFW_KEY_P)) {
-            window.enablePolygonMode();
+            if (!isPolygonMode) {
+                window.enablePolygonMode();
+                isPolygonMode = true;
+            }
         } else if (window.isKeyPressed(GLFW_KEY_O)) {
-            window.disablePolygonMode();
+            if (isPolygonMode) {
+                window.disablePolygonMode();
+                isPolygonMode = false;
+            }
         }
     }
 
@@ -136,5 +143,4 @@ public class Logic implements Logical {
             model.getMesh().cleanUp();
         }
     }
-
 }

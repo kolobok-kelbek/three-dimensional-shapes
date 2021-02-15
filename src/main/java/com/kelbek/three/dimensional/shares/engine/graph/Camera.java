@@ -1,9 +1,11 @@
 package com.kelbek.three.dimensional.shares.engine.graph;
 
+import lombok.extern.slf4j.Slf4j;
 import org.joml.Vector3f;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class Camera {
 
     private final Vector3f position;
