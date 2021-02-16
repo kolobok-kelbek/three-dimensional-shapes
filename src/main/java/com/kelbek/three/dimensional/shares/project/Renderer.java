@@ -8,8 +8,11 @@ import com.kelbek.three.dimensional.shares.engine.Utils;
 import com.kelbek.three.dimensional.shares.engine.Window;
 import com.kelbek.three.dimensional.shares.engine.graph.*;
 import org.springframework.stereotype.Service;
+import java.lang.Math;
+
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
 @Service
 public class Renderer {
@@ -86,6 +89,33 @@ public class Renderer {
         }
 
         shaderProgram.unbind();
+
+        //renderAxes(camera);
+        renderCrossHair(window);
+    }
+
+    private void renderCrossHair(Window window) {
+        glPushMatrix();
+        glLoadIdentity();
+
+        int pixels = 30;
+        float incX = (float) pixels / window.getWidth();
+        float incY = (float) pixels / window.getHeight();
+        glLineWidth(2.0f);
+
+        glColor3f(1.0f, 1.0f, 1.0f);
+
+        glBegin(GL_LINES);
+        glVertex3f(-incX, 0, 0);
+        glVertex3f(+incX, 0, 0);
+        glEnd();
+
+        glBegin(GL_LINES);
+        glVertex3f(0.0f, -incY, 0.0f);
+        glVertex3f(0.0f, +incY, 0.0f);
+        glEnd();
+
+        glPopMatrix();
     }
 
     public void cleanup() {
